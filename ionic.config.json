@@ -1,0 +1,5 @@
+{
+  "name": "book-collection-manager",
+  "integrations": { "capacitor": {} },
+  "type": "angular"
+}

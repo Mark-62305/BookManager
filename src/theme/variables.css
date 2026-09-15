@@ -1,0 +1,27 @@
+:root {
+  --ion-color-primary: #e1653e;
+  --ion-color-primary-rgb: 225, 101, 62;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #c65937;
+  --ion-color-primary-tint: #e47451;
+  --ion-color-success: #39715e;
+  --ion-color-success-rgb: 57, 113, 94;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #326353;
+  --ion-color-success-tint: #4d7f6e;
+  --ion-color-danger: #aa5748;
+  --ion-color-danger-rgb: 170, 87, 72;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #964d3f;
+  --ion-color-danger-tint: #b3685a;
+  --ion-background-color: #f6f3ec;
+  --ion-text-color: #17211d;
+  --ion-font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html, body { background: #f6f3ec; }
+* { box-sizing: border-box; }
+.alert-button.danger-button { color: #aa5748 !important; font-weight: 750; }

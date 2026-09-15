@@ -1,0 +1,8 @@
+@use '../add-book/add-book.page.scss';
+
+.load-state { display: grid; place-items: center; min-height: 350px; padding: 36px; border: 1px dashed #cbc4b7; border-radius: 22px; text-align: center; }
+.load-state ion-spinner { color: #e1653e; }
+.load-state h2 { margin: 16px 0 6px; color: #17211d; font-family: Georgia, serif; font-size: 1.4rem; }
+.load-state p { max-width: 460px; margin: 0 0 15px; color: #6d756f; line-height: 1.5; }
+.load-state > span { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; color: #a74f3d; background: #f4dfd9; font: 700 1.35rem Georgia, serif; }
+.load-state ion-button { --border-radius: 12px; --border-color: #a74f3d; --color: #a74f3d; font-size: .75rem; font-weight: 750; text-transform: none; }

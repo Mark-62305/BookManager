@@ -1,0 +1,103 @@
+<ion-header class="ion-no-border" translucent="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/books" text=""></ion-back-button>
+      </ion-buttons>
+      <ion-title>Edit book</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen="true">
+    <main class="form-shell">
+      <section class="form-intro">
+        <span class="intro-icon"><ion-icon [icon]="createOutline"></ion-icon></span>
+        <p class="eyebrow">REFINE THE DETAILS</p>
+        <h1>Edit this book</h1>
+        <p>Keep your collection accurate and up to date.</p>
+      </section>
+
+      @if (loading) {
+        <section class="load-state">
+          <ion-spinner name="crescent"></ion-spinner>
+          <h2>Loading book...</h2>
+        </section>
+      } @else if (loadError) {
+        <section class="load-state error-state" role="alert">
+          <span>!</span>
+          <h2>We couldn't load this book</h2>
+          <p>{{ loadError }}</p>
+          <div>
+            <ion-button fill="outline" (click)="loadBook()"><ion-icon slot="start" [icon]="refreshOutline"></ion-icon>Try again</ion-button>
+            <ion-button fill="clear" routerLink="/books">Back to library</ion-button>
+          </div>
+        </section>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="updateBook()" novalidate>
+          <section class="form-card">
+            <div class="section-heading"><span>01</span><div><h2>Book details</h2><p>Update the information stored in Firebase.</p></div></div>
+
+            <div class="field-grid">
+              <div class="field full">
+                <ion-item lines="none" [class.invalid]="showError('title')">
+                  <ion-input label="Book Title" labelPlacement="stacked" placeholder="e.g. Clean Code" formControlName="title" autocomplete="off"></ion-input>
+                </ion-item>
+                @if (showError('title', 'required')) { <ion-note color="danger">Book title is required.</ion-note> }
+                @if (showError('title', 'minlength')) { <ion-note color="danger">Use at least 2 characters.</ion-note> }
+              </div>
+
+              <div class="field full">
+                <ion-item lines="none" [class.invalid]="showError('author')">
+                  <ion-input label="Author" labelPlacement="stacked" placeholder="e.g. Robert C. Martin" formControlName="author" autocomplete="off"></ion-input>
+                </ion-item>
+                @if (showError('author', 'required')) { <ion-note color="danger">Author is required.</ion-note> }
+                @if (showError('author', 'minlength')) { <ion-note color="danger">Use at least 2 characters.</ion-note> }
+              </div>
+
+              <div class="field">
+                <ion-item lines="none" [class.invalid]="showError('category')">
+                  <ion-select label="Category" labelPlacement="stacked" placeholder="Choose a category" interface="action-sheet" formControlName="category">
+                    @for (category of categories; track category) { <ion-select-option [value]="category">{{ category }}</ion-select-option> }
+                  </ion-select>
+                </ion-item>
+                @if (showError('category')) { <ion-note color="danger">Choose a category.</ion-note> }
+              </div>
+
+              <div class="field">
+                <ion-item lines="none" [class.invalid]="showError('publicationYear')">
+                  <ion-input label="Publication Year" labelPlacement="stacked" placeholder="e.g. 2008" type="number" inputmode="numeric" min="1" [max]="currentYear" formControlName="publicationYear"></ion-input>
+                </ion-item>
+                @if (showError('publicationYear', 'required')) { <ion-note color="danger">Publication year is required.</ion-note> }
+                @if (showError('publicationYear', 'min')) { <ion-note color="danger">Year must be greater than 0.</ion-note> }
+                @if (showError('publicationYear', 'max')) { <ion-note color="danger">Year cannot be later than {{ currentYear }}.</ion-note> }
+              </div>
+            </div>
+          </section>
+
+          <section class="form-card status-card">
+            <div class="section-heading"><span>02</span><div><h2>Availability</h2><p>Set the book's current shelf status.</p></div></div>
+            <div class="status-options">
+              <label [class.selected]="form.controls.availabilityStatus.value === 'Available'">
+                <input type="radio" formControlName="availabilityStatus" value="Available">
+                <span class="status-symbol available"><ion-icon [icon]="checkmarkCircleOutline"></ion-icon></span>
+                <span><strong>Available</strong><small>Ready to read or lend</small></span>
+              </label>
+              <label [class.selected]="form.controls.availabilityStatus.value === 'Unavailable'">
+                <input type="radio" formControlName="availabilityStatus" value="Unavailable">
+                <span class="status-symbol unavailable">—</span>
+                <span><strong>Unavailable</strong><small>Currently out or in use</small></span>
+              </label>
+            </div>
+          </section>
+
+          <div class="form-actions">
+            <ion-button type="button" fill="clear" routerLink="/books">Cancel</ion-button>
+            <ion-button type="submit" [disabled]="form.invalid || saving">
+              @if (saving) { <ion-spinner slot="start" name="crescent"></ion-spinner> }
+              @else { <ion-icon slot="start" [icon]="saveOutline"></ion-icon> }
+              {{ saving ? 'Updating...' : 'Update book' }}
+            </ion-button>
+          </div>
+        </form>
+      }
+    </main>
+  </ion-content>
