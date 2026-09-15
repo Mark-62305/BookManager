@@ -38,7 +38,7 @@ npx cap sync android
 npx cap open android
 ```
 
-The existing Android package ID remains `com.example.photogallery` so the checked-in native shell continues to build without a package migration. Its visible application name is updated to Book Collection Manager.
+The Android package ID is `com.example.bookmanager`, and the visible application name is Book Collection Manager.
 
 ## Data shape
 

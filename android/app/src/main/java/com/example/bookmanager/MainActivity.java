@@ -1,4 +1,4 @@
-package com.example.photogallery;
+package com.example.bookmanager;
 
 import com.getcapacitor.BridgeActivity;
 
