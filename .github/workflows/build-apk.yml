@@ -27,8 +27,23 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Run unit tests
-        run: npm run test:unit -- --run
+      - name: Run end-to-end tests
+        shell: bash
+        run: |
+          npm start -- --host 127.0.0.1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+
+          for attempt in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:4200/ > /dev/null; then
+              npm run test:e2e
+              exit $?
+            fi
+            sleep 2
+          done
+
+          echo "Angular development server did not start within 120 seconds."
+          exit 1
 
       - name: Build Ionic application
         run: npm run build
