@@ -3,8 +3,8 @@ ion-header, ion-toolbar { --background: rgba(246, 243, 236, .92); --color: var(-
 ion-header { backdrop-filter: blur(16px); }
 ion-toolbar { --min-height: 68px; --padding-start: max(18px, env(safe-area-inset-left)); --padding-end: max(12px, env(safe-area-inset-right)); }
 ion-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.15rem; font-weight: 700; }
-.brand-mark { display: inline-grid; place-items: center; width: 31px; height: 31px; margin-right: 8px; border-radius: 10px; color: #fff; background: var(--ink); vertical-align: middle; }
-.brand-mark ion-icon { font-size: 1rem; }
+.brand-mark { display: inline-block; width: 36px; height: 36px; margin-right: 8px; overflow: hidden; border-radius: 10px; background: #fff; box-shadow: 0 2px 8px rgba(23,33,29,.14); vertical-align: middle; }
+.brand-mark img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .header-add { --background: var(--orange); --color: white; --border-radius: 12px; margin: 0; font-size: .78rem; font-weight: 750; text-transform: none; }
 ion-content { --background: var(--paper); --color: var(--ink); }
 .library-shell { width: min(1080px, 100%); min-height: 100%; margin: 0 auto; padding: 18px 18px calc(112px + env(safe-area-inset-bottom)); }
